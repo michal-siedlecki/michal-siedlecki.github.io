@@ -39,13 +39,7 @@ instructions that the operating system and processor can understand.
 So while Python isn't compiled to machine code ahead of time like C or C++, it does go through 
 a compilation step before execution — which is why it’s called an interpreted language with 
 compiled bytecode.
-```mermaid
-flowchart TD
-    A[Python Source Code .py file] --> B[Bytecode Compilation]
-    B --> C[Bytecode .pyc file]
-    C --> D[Python Virtual Machine]
-    D --> E[Machine Code Execution]
-```
+
 ### What data type can be used as a key in dictionary
 In Python, dictionary keys must be hashable objects, which means they must have a fixed 
 hash value during their lifetime and implement the __hash__() and __eq__() methods properly.
@@ -133,4 +127,74 @@ equal, not equal, less than, greater, less equal, greater equal, compare
 - reflection `__instancecheck__`, 
 - context managers `__enter__`, `__exit__`
 
+### What is a thread? When to use threading and when async?
+A thread is a single, lightweight unit of execution within a process. 
+In Python, threads allow concurrent execution of code, but due to the 
+Global Interpreter Lock (GIL), only one thread executes Python bytecode at a time.
+
+Use threading when you have I/O bound tasks (like network requests, 
+file I/O, or database queries) and want to perform them concurrently.
+It's easier to work with if you're using existing synchronus libraries
+
+Use async when you're dealing with many I/O bound tasks and want efficient, scalable
+concurrency without using threads. It uses an event loop and non-blocking I/O,
+which can be more efficient in terms of memory
+and context switching, especially at scale.
+
+Avoid both for CPU-bound tasks -- use multiprocessing or naive code instead
+
+#### core differences
+- `threading`  Runs multiple threads in parallel using OS threads.
+- `asyncio`  Runs tasks in a single thread using an event loop (cooperative multitasking).
+
+
+*Threading example*
+```python
+import threading
+import time
+import requests
+
+def fetch(url):
+    print(f"Fetching {url}")
+    response = requests.get(url)
+    print(f"Done {url}: {len(response.content)} bytes")
+
+start = time.time()
+
+t1 = threading.Thread(target=fetch, args=("https://httpbin.org/delay/2",))
+t2 = threading.Thread(target=fetch, args=("https://httpbin.org/delay/2",))
+
+t1.start()
+t2.start()
+
+t1.join()
+t2.join()
+
+print(f"Total time: {time.time() - start:.2f} seconds")
+
+```
+*Async example*
+```python
+import asyncio
+import aiohttp
+import time
+
+async def fetch(session, url):
+    print(f"Fetching {url}")
+    async with session.get(url) as response:
+        content = await response.read()
+        print(f"Done {url}: {len(content)} bytes")
+
+async def main():
+    async with aiohttp.ClientSession() as session:
+        await asyncio.gather(
+            fetch(session, "https://httpbin.org/delay/2"),
+            fetch(session, "https://httpbin.org/delay/2"),
+        )
+
+start = time.time()
+asyncio.run(main())
+print(f"Total time: {time.time() - start:.2f} seconds")
+
+```
 
