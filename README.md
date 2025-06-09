@@ -11,9 +11,9 @@ Feel free to check out my projects or reach out if you’d like to connect! 🚀
 
 ## Articles
 
-[Systemy Operacyjne - notatki](https://github.com/michal-siedlecki/michal-siedlecki.github.io/blob/main/Systemy%20Operacyjne%20-%20notatki.md)
-
-[Computer networks](https://github.com/michal-siedlecki/michal-siedlecki.github.io/blob/main/Computer%20networks.md)
+- [[PL] Systemy Operacyjne - notatki](https://github.com/michal-siedlecki/michal-siedlecki.github.io/blob/main/systemy-operacyjne.md)
+- [Computer networks](https://github.com/michal-siedlecki/michal-siedlecki.github.io/blob/main/computer-networks.md)
+- [Jenkins tutorial](https://github.com/michal-siedlecki/michal-siedlecki.github.io/blob/main/jenkins-tutorial.md)
 
 ---
 ## Python quirks and features
@@ -198,3 +198,7 @@ print(f"Total time: {time.time() - start:.2f} seconds")
 
 ```
 
+### What are `__slots__` ?
+In Python, `__slots__` is a special class attribute that defines a fixed list of attribute names for instances. 
+It is used to reduce memory usage and speed up attribute access by preventing the creation of a per-instance `__dict__`.
+As a result, instances of the class cannot have attributes beyond those listed in `__slots__`.
