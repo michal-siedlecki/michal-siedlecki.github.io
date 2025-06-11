@@ -60,23 +60,13 @@ The client sent a TCP packet with FIN,ACK flags, the server responded similarly,
 
 ### What is DNS for?
 
-DNS (Domain Name System) translates human-readable domain names into machine-readable IP addresses (IPv4 or IPv6).
-
-### What is the default DNS port? Was it the one you used?
-
-The default port is 53, and that was the one used.
+DNS (Domain Name System) translates human-readable domain names into 
+machine-readable IP addresses (IPv4 or IPv6). The default port for 
+DNS query is 53.
 
 ### What is UDP?
 
 UDP (User Datagram Protocol) is a connectionless transport layer protocol. Unlike TCP, it does not require a handshake (SYN/ACK) and has lower overhead.
-
-### What did you see if you follow the UDP stream?
-
-The response from the DNS hosting nameserver.
-
-### What happened when the connection ended? Why?
-
-Since UDP is connectionless, the communication ends after a response is received. There is no FIN/ACK handshake.
 
 ---
 

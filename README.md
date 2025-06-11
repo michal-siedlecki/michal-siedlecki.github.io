@@ -14,6 +14,7 @@ Feel free to check out my projects or reach out if you’d like to connect! 🚀
 - [[PL] Systemy Operacyjne - notatki](https://github.com/michal-siedlecki/michal-siedlecki.github.io/blob/main/systemy-operacyjne.md)
 - [Computer networks](https://github.com/michal-siedlecki/michal-siedlecki.github.io/blob/main/computer-networks.md)
 - [Jenkins tutorial](https://github.com/michal-siedlecki/michal-siedlecki.github.io/blob/main/jenkins-tutorial.md)
+- [GIT commands](https://github.com/michal-siedlecki/michal-siedlecki.github.io/blob/main/git-commands.md)
 
 ---
 ## Python quirks and features
