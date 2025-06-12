@@ -203,3 +203,30 @@ print(f"Total time: {time.time() - start:.2f} seconds")
 In Python, `__slots__` is a special class attribute that defines a fixed list of attribute names for instances. 
 It is used to reduce memory usage and speed up attribute access by preventing the creation of a per-instance `__dict__`.
 As a result, instances of the class cannot have attributes beyond those listed in `__slots__`.
+
+### What is Garbage Collector?
+Garbage Collector is a mechanism in Python that automaticaly reclaims memory by deleting
+objects that are no longer reachable. The GC runs automatically during program execution,
+so you usually don't need to trigger it manually.
+
+In CPython, memory is managed using reference counding, and the garbage collector
+helps clean up cyclic references - objects that refer to each other
+but are otherwise unreachable.
+
+While you can manually trigger GC using the `gc.collect()` module
+from `gc` module, it's typically unnecessary and should be done
+only for a specific reason such as managing performance or debugging 
+memory leaks
+
+### What is `weakref` module in Python for?
+The `weakref` module in Python allows you tu create weak references
+to objects. A weak reference does not prevent the obect to be destroyed by
+garbage collector. If there are no strong references to the object
+garbage collector is free to reclaim it even if the weak references exist.
+
+This is useful for caching or tracking objects without preventing
+their cleanup. For example, `weakref.WeakValueDictionary` can store
+objects in a way that allows them to be automatically removed when
+no longer in use. Not all objects support weak references.
+immutable built-in types like `int` and `str` typically do not.
+
